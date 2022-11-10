@@ -5,11 +5,10 @@ import io.github.thebusybiscuit.slimefun4.api.items.ItemSetting;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import me.smourad.fastertools.item.FasterTool;
-import me.smourad.fastertools.item.FasterToolUseHandler;
+import me.smourad.fastertools.utils.FasterConstant;
 import org.bukkit.World;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-
-import javax.annotation.Nonnull;
 
 public class MoonlightTool extends FasterTool {
 
@@ -22,19 +21,12 @@ public class MoonlightTool extends FasterTool {
     }
 
     @Override
-    @Nonnull
-    public FasterToolUseHandler getItemHandler() {
-        return event -> {
-            if (event.isBestTool()) {
-                World world = event.getPlayer().getWorld();
-                double time = world.getTime();
-                boolean isNight = 23460 > time && time >= 12542;
-                double speedEfficiency = event.getToolSpeedEfficiency();
+    public double getEfficiencyMultiplier(Player player, ItemStack tool) {
+        World world = player.getWorld();
+        double time = world.getTime();
+        boolean isNight = FasterConstant.DAY_BEGIN_TIME > time && time >= FasterConstant.NIGHT_BEGIN_TIME;
 
-                event.setToolSpeedEfficiency(speedEfficiency * (isNight ?
-                        nightEfficiencyRatio.getValue() : dayEfficiencyRatio.getValue()));
-            }
-        };
+        return isNight ? nightEfficiencyRatio.getValue() : dayEfficiencyRatio.getValue();
     }
 
 }

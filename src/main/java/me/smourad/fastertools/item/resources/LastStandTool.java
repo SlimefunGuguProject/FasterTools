@@ -5,11 +5,9 @@ import io.github.thebusybiscuit.slimefun4.api.items.ItemSetting;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import me.smourad.fastertools.item.FasterTool;
-import me.smourad.fastertools.item.FasterToolUseHandler;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
-
-import javax.annotation.Nonnull;
 
 public class LastStandTool extends FasterTool {
 
@@ -22,19 +20,12 @@ public class LastStandTool extends FasterTool {
     }
 
     @Override
-    @Nonnull
-    public FasterToolUseHandler getItemHandler() {
-        return event -> {
-            if (event.isBestTool()) {
-                ItemStack tool = event.getTool();
-                if (!tool.hasItemMeta()) return;
+    public double getEfficiencyMultiplier(Player player, ItemStack tool) {
+        if (tool.getItemMeta() instanceof Damageable damageable) {
+            double durabilityPercentageLoss = damageable.getDamage() / (double) tool.getType().getMaxDurability();
+            return 1.0 + durabilityPercentageLoss * efficiencyBonusPerLossPercentage.getValue();
+        }
 
-                if (tool.getItemMeta() instanceof Damageable damageable) {
-                    double speedEfficiency = event.getToolSpeedEfficiency();
-                    double durabilityPercentageLoss = damageable.getDamage() / (double) tool.getType().getMaxDurability();
-                    event.setToolSpeedEfficiency(speedEfficiency * (1 + durabilityPercentageLoss * efficiencyBonusPerLossPercentage.getValue()));
-                }
-            }
-        };
+        return 1.0;
     }
 }

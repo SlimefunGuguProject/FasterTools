@@ -151,10 +151,6 @@ public class MinerWatcher implements Listener {
 
         double speedMultiplier = event.getToolSpeedEfficiency();
 
-        if (!block.getDrops(tool).isEmpty() && speedMultiplier > 1.0) {
-            speedMultiplier += Math.pow(tool.getEnchantmentLevel(Enchantment.DIG_SPEED), 2) + 1;
-        }
-
         if (player.hasPotionEffect(PotionEffectType.FAST_DIGGING)) {
             PotionEffect haste = player.getPotionEffect(PotionEffectType.FAST_DIGGING);
             assert haste != null;

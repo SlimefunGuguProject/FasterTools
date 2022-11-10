@@ -4,7 +4,9 @@ import org.bukkit.Material;
 
 import java.util.Random;
 
-public class MinerUtils {
+public final class MinerUtils {
+
+    private MinerUtils() {}
 
     public static boolean isBestToolToBreakBlock(Material tool, Material block) {
         switch (tool) {

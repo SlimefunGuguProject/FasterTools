@@ -1,13 +1,12 @@
 package me.smourad.fastertools;
 
-import me.smourad.fastertools.mining.MiningListener;
+import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
+import io.github.thebusybiscuit.slimefun4.libraries.dough.config.Config;
 import me.smourad.fastertools.mining.MinerWatcher;
+import me.smourad.fastertools.mining.MiningListener;
 import me.smourad.fastertools.resources.FasterItemSetup;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
-import io.github.thebusybiscuit.slimefun4.libraries.dough.config.Config;
 
 import java.util.Arrays;
 

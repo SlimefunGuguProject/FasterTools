@@ -6,7 +6,6 @@ import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import me.smourad.fastertools.item.FasterTool;
 import me.smourad.fastertools.item.FasterToolUseHandler;
-import org.bukkit.ChatColor;
 import org.bukkit.World;
 import org.bukkit.inventory.ItemStack;
 

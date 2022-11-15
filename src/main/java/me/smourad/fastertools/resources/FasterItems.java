@@ -6,8 +6,8 @@ import org.bukkit.Material;
 
 public class FasterItems {
 
-    private static final String MOONLIGHT_LORE = ChatColor.WHITE + "This tool is thirsty of moonlight ☽";
-    private static final String LAST_STAND_LORE = ChatColor.WHITE + "This tool do his best at the end";
+    private static final String MOONLIGHT_LORE = ChatColor.WHITE + "Faster at night ☽";
+    private static final String LAST_STAND_LORE = ChatColor.WHITE + "Faster at lowest durability";
 
     public static final SlimefunItemStack MOONLIGHT_PICKAXE = new SlimefunItemStack("MOONLIGHT_PICKAXE", Material.IRON_PICKAXE, ChatColor.LIGHT_PURPLE + "Moonlight Pickaxe", MOONLIGHT_LORE);
     public static final SlimefunItemStack MOONLIGHT_AXE = new SlimefunItemStack("MOONLIGHT_AXE", Material.IRON_AXE, ChatColor.LIGHT_PURPLE + "Moonlight Axe", MOONLIGHT_LORE);

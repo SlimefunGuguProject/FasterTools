@@ -9,6 +9,7 @@ import com.comphenix.protocol.events.PacketEvent;
 import com.comphenix.protocol.wrappers.BlockPosition;
 import com.comphenix.protocol.wrappers.EnumWrappers;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
+import io.github.thebusybiscuit.slimefun4.core.attributes.DamageableItem;
 import me.smourad.fastertools.FasterToolsAddon;
 import me.smourad.fastertools.event.PlayerMiningBlockEvent;
 import net.minecraft.core.BlockPos;
@@ -196,7 +197,11 @@ public class MinerWatcher implements Listener {
 
         if (event.isCancelled()) return;
 
-        block.breakNaturally(tool);
+        if (event.isDropItems()) {
+            block.breakNaturally(tool);
+        } else {
+            block.setType(Material.AIR);
+        }
 
         world.playSound(block.getLocation(), soundGroup.getBreakSound(), soundGroup.getVolume(), soundGroup.getPitch());
         world.spawnParticle(Particle.BLOCK_CRACK, block.getLocation().add(0.5, 0.5, 0.5),
@@ -207,8 +212,8 @@ public class MinerWatcher implements Listener {
             orb.setExperience(event.getExpToDrop());
         }
 
-        // They already lose durability on block break event
-        if (SlimefunItem.getByItem(tool) == null) {
+        SlimefunItem item = SlimefunItem.getByItem(tool);
+        if (item == null || (item instanceof DamageableItem damageableItem && damageableItem.isDamageable())) {
             if (random.nextInt(100) < 100. / (tool.getEnchantmentLevel(Enchantment.DURABILITY) + 1.))
                 useDurability(tool, player);
         }

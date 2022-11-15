@@ -1,2 +1,3 @@
 options:
   auto-update: true
+  lore-update-interval: 10

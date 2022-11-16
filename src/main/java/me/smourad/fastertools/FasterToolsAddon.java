@@ -8,7 +8,6 @@ import me.smourad.fastertools.resources.FasterItemSetup;
 import me.smourad.fastertools.updater.LoreUpdaterTask;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.checkerframework.checker.nullness.qual.NonNull;
 
 import javax.annotation.Nonnull;
 import java.util.Arrays;

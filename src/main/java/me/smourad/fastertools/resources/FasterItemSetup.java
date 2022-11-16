@@ -2,10 +2,12 @@ package me.smourad.fastertools.resources;
 
 import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
+import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 import me.smourad.fastertools.FasterToolsAddon;
 import me.smourad.fastertools.item.resources.LastStandTool;
 import me.smourad.fastertools.item.resources.MoonlightTool;
+import me.smourad.fastertools.item.resources.disassembler.AtomicDisassemblerTool;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -88,6 +90,13 @@ public class FasterItemSetup {
                         new ItemStack(Material.BLAZE_ROD), new ItemStack(Material.BLAZE_ROD), new ItemStack(Material.BLAZE_ROD),
                         new ItemStack(Material.BLAZE_ROD), new ItemStack(Material.GOLDEN_SHOVEL), new ItemStack(Material.BLAZE_ROD),
                         new ItemStack(Material.BLAZE_ROD), new ItemStack(Material.BLAZE_ROD), new ItemStack(Material.BLAZE_ROD)
+                }).register(FasterToolsAddon.INSTANCE);
+
+        new AtomicDisassemblerTool(FASTER_TOOL, FasterItems.ATOMIC_DISASSEMBLER, RecipeType.ENHANCED_CRAFTING_TABLE,
+                new ItemStack[] {
+                        SlimefunItems.CARBONADO, SlimefunItems.LARGE_CAPACITOR, SlimefunItems.CARBONADO,
+                        SlimefunItems.LARGE_CAPACITOR, new ItemStack(Material.SHEARS), SlimefunItems.LARGE_CAPACITOR,
+                        SlimefunItems.CARBONADO, SlimefunItems.LARGE_CAPACITOR, SlimefunItems.CARBONADO
                 }).register(FasterToolsAddon.INSTANCE);
     }
 

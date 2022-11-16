@@ -4,12 +4,12 @@ import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
 import io.github.thebusybiscuit.slimefun4.api.items.ItemSetting;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
-import me.smourad.fastertools.item.FasterTool;
+import me.smourad.fastertools.item.DamageableFasterTool;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
 
-public class LastStandTool extends FasterTool {
+public class LastStandTool extends DamageableFasterTool {
 
     protected final ItemSetting<Double> efficiencyBonusPerLossPercentage
             = new ItemSetting<>(this, "efficiency-bonus-per-loss-percentage", 0.1);
@@ -22,7 +22,7 @@ public class LastStandTool extends FasterTool {
     @Override
     public double getEfficiencyMultiplier(Player player, ItemStack tool) {
         if (tool.getItemMeta() instanceof Damageable damageable) {
-            double durabilityPercentageLoss = damageable.getDamage() / (double) tool.getType().getMaxDurability();
+            double durabilityPercentageLoss = damageable.getDamage() / (double) tool.getType().getMaxDurability() * 100;
             return 1.0 + durabilityPercentageLoss * efficiencyBonusPerLossPercentage.getValue();
         }
 

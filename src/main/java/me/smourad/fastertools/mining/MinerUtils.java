@@ -570,6 +570,7 @@ public final class MinerUtils {
                     case RED_WOOL:
                     case WHITE_WOOL:
                     case YELLOW_WOOL:
+                        return true;
 
                     default:
                         return false;
@@ -689,6 +690,17 @@ public final class MinerUtils {
             case SCULK -> 1;
             case SCULK_SENSOR, SCULK_SHRIEKER, SCULK_CATALYST -> 5;
             default -> 0;
+        };
+    }
+
+    public static Material[] getBestTools() {
+        return new Material[] {
+                Material.NETHERITE_PICKAXE,
+                Material.SHEARS,
+                Material.NETHERITE_AXE,
+                Material.NETHERITE_SHOVEL,
+                Material.NETHERITE_SWORD,
+                Material.NETHERITE_HOE
         };
     }
 

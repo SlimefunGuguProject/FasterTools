@@ -94,7 +94,7 @@ public class MinerWatcher implements Listener {
                             tasks.remove(player).cancel();
                             sendCrackAnimation(player, blocks.remove(player), -1);
                         }
-
+                        
                         if (block.getType().getHardness() > 0) {
                             new BukkitRunnable() {
                                 @Override
@@ -150,7 +150,14 @@ public class MinerWatcher implements Listener {
         PlayerMiningBlockEvent event = new PlayerMiningBlockEvent(player, block, tool);
         Bukkit.getPluginManager().callEvent(event);
 
+        if (event.isCancelled()) return Integer.MAX_VALUE;
+
         double speedMultiplier = event.getToolSpeedEfficiency();
+
+        if (event.canHarvest() && event.isBestTool()
+                && tool.getEnchantmentLevel(Enchantment.DIG_SPEED) > 0) {
+            speedMultiplier += Math.pow(tool.getEnchantmentLevel(Enchantment.DIG_SPEED), 2) + 1;
+        }
 
         if (player.hasPotionEffect(PotionEffectType.FAST_DIGGING)) {
             PotionEffect haste = player.getPotionEffect(PotionEffectType.FAST_DIGGING);
@@ -176,7 +183,7 @@ public class MinerWatcher implements Listener {
         }
 
         double damage = speedMultiplier / material.getHardness();
-        damage /= !block.getDrops(tool).isEmpty() ? 30 : 100;
+        damage /= event.canHarvest() ? 30.0 : 100.0;
 
         if (damage > 1) {
             return 0;
@@ -274,14 +281,14 @@ public class MinerWatcher implements Listener {
                     cancel();
                 } else {
                     int ticks = getBreakingTicksSpeed(player, block);
-                    if (mining > ticks) {
+                    if (mining > ticks || ticks < 1) {
                         blocks.remove(player);
                         tasks.remove(player);
                         sendCrackAnimation(player, block, -1);
                         breakBlock(player, block, tool);
                         cancel();
                     } else {
-                        sendCrackAnimation(player, block, (int) (mining / (ticks * 0.1)));
+                        sendCrackAnimation(player, block, (int) (mining / (ticks / 11.)) - 1);
                         mining++;
                     }
                 }
